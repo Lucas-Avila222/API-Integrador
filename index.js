@@ -32,8 +32,8 @@ import express from 'express';
 
     app.post('/funcionarios', async (req, res) => {
     const { imagem, nome_completo, nascimento, e_mail, cargo, telefone} = req.body;
-    const [id] = await mysql2("funcionarios").insert({imagen, nome_completo, nascimento, e_mail, cargo, telefone});
-    console.log('Funcionário cadastrado:', {imagen, nome_completo, nascimento, e_mail, cargo, telefone});
+    const [id] = await mysql2("funcionarios").insert({imagem, nome_completo, nascimento, e_mail, cargo, telefone});
+    console.log('Funcionário cadastrado:', {imagem, nome_completo, nascimento, nascimento, e_mail, cargo, telefone});
     res.status(201).json({ mensagem: 'Funcionário cadastrado com sucesso' });
 });
 
