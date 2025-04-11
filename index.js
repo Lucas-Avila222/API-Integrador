@@ -22,7 +22,6 @@ import express from 'express';
 
   app.get("/funcionarios", async (req, res) => {
     try {
-    const { id } = req.params;
     const funcionarios = await mysql2.select("*").from("funcionarios");
     res.json(funcionarios);
     } catch (error) {
@@ -32,23 +31,22 @@ import express from 'express';
   });
 
     app.post('/funcionarios', async (req, res) => {
-    const { nome, cargo, salario } = req.body;
+    const { imagem, nome_completo, nascimento, e_mail, cargo, telefone} = req.body;
     const [id] = await mysql2("funcionarios").insert({imagen, nome_completo, nascimento, e_mail, cargo, telefone});
-    console.log('Funcionário cadastrado:', {imagen, nome_completo, nascimento, e_mail, cargo});
+    console.log('Funcionário cadastrado:', {imagen, nome_completo, nascimento, e_mail, cargo, telefone});
     res.status(201).json({ mensagem: 'Funcionário cadastrado com sucesso' });
 });
 
     app.post('/clientes', async (req, res) => {
-    const { nome, email, telefone } = req.body;
-    const [id] = await mysql2("clientes").insert({imagen, nome, nascimento, e_mail, telefone, senha_cliente});
-    console.log('Cliente cadastrado:', { imagem, nome, nascimento, e_mail});
+    const { imagem, nome, e_mail, telefone, senha_cliente } = req.body;
+    const [id] = await mysql2("clientes").insert({imagen, nome, e_mail, telefone, senha_cliente});
+    console.log('Cliente cadastrado:', { imagem, nome, e_mail, telefone, senha_cliente});
     res.status(201).json({ mensagem: 'Cliente cadastrado com sucesso' });
 });
 
 
   app.get("/clientes", async (req, res) => {
     try {
-    const { id } = req.params;
     const clientes = await mysql2.select("*").from("clientes");
     res.json(clientes);
     } catch (error) {
@@ -59,8 +57,7 @@ import express from 'express';
 
   
   app.get("/tipo", async (req, res) => {
-    try { 
-    const { id } = req.params;
+    try {
     const tipo = await mysql2.select("*").from("tipo");
     res.json(tipo);
     } catch (error) {
@@ -72,7 +69,6 @@ import express from 'express';
 
   app.get("/bike_Montada", async (req, res) => {
     try {
-    const { id } = req.params;
     const bike_Montada = await mysql2.select("*").from("bike_Montada");
     res.json(bike_Montada);
     } catch (error) {
@@ -96,7 +92,6 @@ app.get("/Quadro", async (req, res) => {
 
 app.get("/acessorios", async (req, res) => {
   try {
-  const { id } = req.params;
   const acessorios = await mysql2.select("*").from("acessorios");
   res.json(acessorios);
   } catch (error) {
@@ -108,7 +103,6 @@ app.get("/acessorios", async (req, res) => {
 
 app.get("/personalizada", async (req, res) => {
   try {
-  const { id } = req.params;
   const personalizada = await mysql2.select("*").from("personalizada");
   res.json(personalizada);
   } catch (error) {
@@ -120,7 +114,6 @@ app.get("/personalizada", async (req, res) => {
 
 app.get("/pedido", async (req, res)  => {
 try {
-  const { id } = req.params;
 const pedido = await mysql2.select("*").from("personalizada");
 res.json(pedido);
 } catch (error) {
@@ -132,7 +125,6 @@ res.json(pedido);
 
 app.get("/historico_compras", async (req, res)  => {
   try {
-  const { id } = req.params;
   const historico_compras = await mysql2.select("*").from("historico_compras");
   res.json(historico_compras);
   } catch (error) {
