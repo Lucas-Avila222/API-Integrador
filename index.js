@@ -32,16 +32,9 @@ import express from 'express';
 
     app.post('/funcionarios', async (req, res) => {
     const { imagem, nome_completo, nascimento, e_mail, cargo, telefone} = req.body;
-    const [id] = await mysql2("funcionarios").insert({imagem, nome_completo, nascimento, e_mail, cargo, telefone});
+    const id = await mysql2("funcionarios").insert({imagem, nome_completo, nascimento, e_mail, cargo, telefone});
     console.log('Funcionário cadastrado:', {imagem, nome_completo, nascimento, nascimento, e_mail, cargo, telefone});
     res.status(201).json({ mensagem: 'Funcionário cadastrado com sucesso' });
-});
-
-    app.post('/clientes', async (req, res) => {
-    const { imagem, nome, e_mail, telefone, senha_cliente } = req.body;
-    const [id] = await mysql2("clientes").insert({imagen, nome, e_mail, telefone, senha_cliente});
-    console.log('Cliente cadastrado:', { imagem, nome, e_mail, telefone, senha_cliente});
-    res.status(201).json({ mensagem: 'Cliente cadastrado com sucesso' });
 });
 
 
@@ -54,6 +47,14 @@ import express from 'express';
       res.status(404).json({ mensagem: 'Cliente não encontrado'});
   }
   });
+
+
+app.post('/clientes', async (req, res) => {
+    const { imagem, nome, e_mail, telefone, senha_cliente } = req.body;
+    const id = await mysql2("clientes").insert({imagen, nome, e_mail, telefone, senha_cliente});
+    console.log('Cliente cadastrado:', { imagem, nome, e_mail, telefone, senha_cliente});
+    res.status(201).json({ mensagem: 'Cliente cadastrado com sucesso' });
+});
 
   
   app.get("/tipo", async (req, res) => {
