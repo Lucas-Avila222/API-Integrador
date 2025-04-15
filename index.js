@@ -31,9 +31,9 @@ import express from 'express';
   });
 
     app.post('/funcionarios', async (req, res) => {
-    const { imagem, nome_completo, nascimento, e_mail, cargo, telefone} = req.body;
-    const id = await mysql2("funcionarios").insert({imagem, nome_completo, nascimento, e_mail, cargo, telefone});
-    console.log('Funcionário cadastrado:', {imagem, nome_completo, nascimento, nascimento, e_mail, cargo, telefone});
+    const { imagem, nome_completo, nascimento, e_mail, cargo, telefone, senha_id} = req.body;
+    await mysql2("funcionarios").insert({imagem, nome_completo, nascimento, e_mail, cargo, telefone, senha_id});
+    console.log('Funcionário cadastrado:', {imagem, nome_completo, nascimento, e_mail, cargo, telefone, senha_id});
     res.status(201).json({ mensagem: 'Funcionário cadastrado com sucesso' });
 });
 
@@ -50,9 +50,9 @@ import express from 'express';
 
 
 app.post('/clientes', async (req, res) => {
-    const { imagem, nome, e_mail, telefone, senha_cliente } = req.body;
-    const id = await mysql2("clientes").insert({imagen, nome, e_mail, telefone, senha_cliente});
-    console.log('Cliente cadastrado:', { imagem, nome, e_mail, telefone, senha_cliente});
+    const { imagem, nome, e_mail, telefone, senha_id } = req.body;
+    await mysql2("clientes").insert({imagem, nome, e_mail, telefone, senha_id});
+    console.log('Cliente cadastrado:', { imagem, nome, e_mail, telefone, senha_id});
     res.status(201).json({ mensagem: 'Cliente cadastrado com sucesso' });
 });
 
@@ -81,7 +81,6 @@ app.post('/clientes', async (req, res) => {
 
 app.get("/Quadro", async (req, res) => {
   try {
-  const { id } = req.params;
   const Quadro = await mysql2.select("*").from("Quadro");
   res.json(Quadro);
   } catch (error) {
@@ -138,5 +137,3 @@ app.get("/historico_compras", async (req, res)  => {
 app.listen(port, () => {
   console.log(`App de exemplo está rodando na porta ${port}`);
 });
-
-
